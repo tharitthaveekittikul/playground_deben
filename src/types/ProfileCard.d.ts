@@ -1,0 +1,3 @@
+type ProfileCardProps = {
+  name: string;
+};
