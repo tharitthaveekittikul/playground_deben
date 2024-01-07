@@ -92,7 +92,7 @@ const TabMUIComponent = ({ tabs }: TabComponentProps) => {
   return (
     <div className="pb-4 mt-4">
       <ThemeProvider theme={theme}>
-        <Box sx={{ width: "100%" }}>
+        <Box>
           <Tabs
             value={selectedTab}
             onChange={handleChange}
@@ -105,6 +105,8 @@ const TabMUIComponent = ({ tabs }: TabComponentProps) => {
             }}
             sx={{
               "& .MuiTabs-flexContainer": { width: "100%" },
+              borderBottom: 1,
+              borderColor: "divider",
             }}
           >
             {tabs.map((tab, index) => (

@@ -44,8 +44,8 @@ function CouponRedeem() {
           Starbuck - Discount coupon 100 Baht
         </p>
         <p className="text-xl font-normal">01 Jan 2024 15:45</p>
-        <div className="h-[1px] bg-slate-300 mt-2 w-full"></div>
       </div>
+      <div className="h-[1px] bg-slate-300 mt-2 w-full"></div>
       <TabMUIComponent tabs={tabs} />
     </div>
   );
