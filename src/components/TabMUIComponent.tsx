@@ -3,6 +3,7 @@ import { Box, Tab, Tabs, ThemeProvider, createTheme } from "@mui/material";
 import React, { useState } from "react";
 import { theme } from "../utils/theme";
 import CouponCardMUI from "./CouponCardMUI";
+import { instanceOf } from "prop-types";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -22,7 +23,7 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
     </div>
   );
 }
@@ -59,8 +60,37 @@ const TabMUIComponent = ({ tabs }: TabComponentProps) => {
     );
   };
 
+  const renderObjectCodeContent = (content: TabObjectCodeContent) => {
+    return (
+      <div className="flex flex-col items-center m-4">
+        <h1 className="text-5xl text-branding font-bold mb-12">
+          {content.code}
+        </h1>
+        <h4 className="text-3xl text-[#06BF59] mb-4">
+          Time left {content.time}
+        </h4>
+        <p className="text-xl">{content.description}</p>
+      </div>
+    );
+  };
+
+  const selectContent = (
+    content: TabObjectContent[] | TabObjectCodeContent | string
+  ) => {
+    console.log("content", content);
+    if (typeof content === "string") {
+      return renderContent(content);
+    }
+    if (Array.isArray(content)) {
+      return renderObjectContent(content);
+    }
+    if ("code" in content) {
+      return renderObjectCodeContent(content);
+    }
+  };
+
   return (
-    <div className="py-4">
+    <div className="pb-4 mt-4">
       <ThemeProvider theme={theme}>
         <Box sx={{ width: "100%" }}>
           <Tabs
@@ -95,9 +125,7 @@ const TabMUIComponent = ({ tabs }: TabComponentProps) => {
           </Tabs>
           {tabs.map((tab, index) => (
             <TabPanel key={index} value={selectedTab} index={index}>
-              {typeof tab.content === "string"
-                ? renderContent(tab.content)
-                : renderObjectContent(tab.content)}
+              {selectContent(tab.content)}
             </TabPanel>
           ))}
         </Box>

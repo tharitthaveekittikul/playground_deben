@@ -1,11 +1,13 @@
 import React from "react";
 import { Card, CardContent, Box, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 function CouponCardMUI({
   imageSrc,
   couponName,
   description,
 }: TabObjectContent) {
+  const navigate = useNavigate();
   return (
     <Card
       variant="outlined"
@@ -15,6 +17,9 @@ function CouponCardMUI({
         my: 2,
         boxShadow: 2,
         borderRadius: 2,
+      }}
+      onClick={() => {
+        navigate(`/coupon-details`);
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center" }}>

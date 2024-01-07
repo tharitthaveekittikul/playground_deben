@@ -60,10 +60,13 @@ function HomePrivilege() {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   return (
     <div>
-      {/* <ProfileCard name={firstName} /> */}
-      <ProfileCardMUI name={firstName} />
+      <div className="bg-slate-200 p-4">
+        <ProfileCardMUI name={firstName} />
+        {/* <ProfileCard name={firstName} /> */}
+      </div>
       {/* <TabComponent tabs={tabs} /> */}
       <TabMUIComponent tabs={tabs} />
+
       <button onClick={() => setShowAlert(true)}>Show Alert</button>
       {showAlert && (
         <ModalComponent

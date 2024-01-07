@@ -28,6 +28,31 @@ const TabComponent = ({ tabs }: TabComponentProps) => {
       </div>
     );
   };
+
+  const renderObjectCodeContent = (content: TabObjectCodeContent) => {
+    return (
+      <div>
+        <h1 className="text-5xl text-branding">{content.code}</h1>
+        <h4 className="text-3xl text-[#06BF59]">Time left {content.time}</h4>
+        <p className="text-2xl font-semibold">{content.description}</p>
+      </div>
+    );
+  };
+
+  const selectContent = (
+    content: TabObjectContent[] | TabObjectCodeContent | string
+  ) => {
+    console.log("content", content);
+    if (typeof content === "string") {
+      return renderContent(content);
+    }
+    if (Array.isArray(content)) {
+      return renderObjectContent(content);
+    }
+    if ("code" in content) {
+      return renderObjectCodeContent(content);
+    }
+  };
   const tabWidth = 100 / tabs.length;
 
   return (
@@ -61,9 +86,7 @@ const TabComponent = ({ tabs }: TabComponentProps) => {
             }
             key={tab.key}
           >
-            {typeof tab.content === "string"
-              ? renderContent(tab.content)
-              : renderObjectContent(tab.content)}
+            {selectContent(tab.content)}
           </TabPane>
         ))}
       </Tabs>
